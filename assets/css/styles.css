@@ -130,6 +130,7 @@ img {
 }
 .section {
     padding: 2rem 0 4rem;
+    min-height: 100vh;
 }
 .section_title {
     font-size: var(--h1-font-size);
