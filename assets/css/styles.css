@@ -128,6 +128,11 @@ img {
     max-width: 100%;
     height: auto;
 }
+button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
 .section {
     padding: 2rem 0 4rem;
     min-height: 100vh;
