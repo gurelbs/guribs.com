@@ -1,2 +1,3 @@
 # Responsive Portfolio Website Gurel
-## [demo](https://gurelbs.github.io/gurel.cf/)
+## [link 1](https://gurelbs.github.io/gurel.cf/)
+## [link 2](https://guribs.com)
