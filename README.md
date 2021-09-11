@@ -1,2 +1,2 @@
 # Responsive Portfolio Website Gurel
-## [gurel.cf](https://gurel.cf)
+## [demo](https://gurelbs.github.io/gurel.cf/)
