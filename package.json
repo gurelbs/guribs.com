@@ -7,7 +7,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "deploy":"git add . && git commit -m 'update' && git push origin main",
-    "heroku-deploy":"npm run  deploy && git push heroku master"
+    "herokuDeploy":"concurrently \"npm run deploy\" \"git push heroku main\""
   },
   "repository": {
     "type": "git",
