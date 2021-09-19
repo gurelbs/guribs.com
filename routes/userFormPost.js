@@ -58,8 +58,9 @@ async function saveUserPost(req, res) {
         <h1>${name} details:</h1>
           <p>email: ${user.email}</p>
           names: <ul>
-          ${user.name?.map( name => `<li>${name.trim()}</li>`).join('')}}
+          ${user.name?.map( name => `<li>${name.trim()}</li>`)}
           </ul>
+          <p>email: ${user.email}</p>
           messages: <ul>
           ${user.messages?.map( message => `<li>${message.trim()}</li>`).join('')}
           </ul>
