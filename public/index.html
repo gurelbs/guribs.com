@@ -6,12 +6,11 @@
 		<meta name="author" content="Gurel Ben Shabat">
 		<meta name="description" content="my portfolio website.">
 		<meta name="keywords" content="Gurel, Ben, Shabat, Fullstack, Developer">
+		<meta name="theme_color" content="hsl(220, 69%, 61%)">
 		<!--==================== UNICONS ====================-->
 		<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-
 		<!--==================== SWIPER CSS ====================-->
 		<link rel="stylesheet" href="./assets/css/swiper-bundle.min.css" />
-
 		<!--==================== CSS ====================-->
 		<link rel="stylesheet" href="./assets/css/styles.css" />
 
@@ -570,23 +569,25 @@
 							</div>
 						</div>
 					</div>
-					<form data-netlify="true"  name="contact" action="POST" class="contact_form grid">
+					<form name="contact" action="/send-message" method="POST" class="contact_form grid">
 						<div class="contact_inputs grid">
 							<div class="contact_content">
-								<label for="" class="contact_label">Name</label>
-								<input type="text" class="contact_input" name="name" placeholder="Your name">
+								<label for="name" class="contact_label">Name</label>
+								<input type="text" class="contact_input" id="name" name="name" placeholder="Your name">
 							</div>
 							<div class="contact_content">
-								<label for="" class="contact_label">Email</label>
-								<input type="email" class="contact_input" name="email" placeholder="Your email">
+								<label for="email" class="contact_label">Email</label>
+								<input type="email" class="contact_input" id="email" name="email" placeholder="Your email">
 							</div>
 						</div>
 						<div class="contact_content">
-							<label for="" class="contact_label">Massage</label>
+							<label for="message" class="contact_label">Massage</label>
 							<textarea 
+								id="message"
+								name="message"
 								class="contact_input textarea_input" 
 								cols="0" 
-								rows="7">
+								rows="10">
 							</textarea>
 						</div>
 						<div>
@@ -642,6 +643,8 @@
 				</p>
 			</div>
 		</footer>
+
+
 
 		<!--==================== SCROLL TOP ====================-->
 		<a href="#home" class="scrollup" id="scroll-up">
