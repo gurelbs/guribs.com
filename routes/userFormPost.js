@@ -34,8 +34,8 @@ async function saveUserPost(req, res) {
 	console.log('post saved')
     sgMail
     .send({
-      from: 'guri240@gmail.com',
-      to:  'guri240@gmail.com',
+      from: process.env.GMAIL,
+      to:  process.env.GMAIL,
       subject: `${name} send you a message`,
       text: `
         name: ${name}
