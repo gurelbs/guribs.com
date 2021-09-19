@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const path = require('path');
 const connectMongoose = require('./mongoose')
 const cors = require('cors')

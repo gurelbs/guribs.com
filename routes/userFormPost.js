@@ -1,33 +1,55 @@
-const {Router} = require('express');
-const router = new Router();
-const path = require('path')
+require('dotenv').config({ path: `${__dirname}/../.env` })
+const { Router } = require('express')
+const router = new Router()
 const User = require('../modules/User')
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-async function saveUserPost(req,res){
-  const {name, email, message} = req.body;
-  try {
-    const userExist = await User.findOne({email:email});
-    if (userExist) {
-      console.log('user already exist. updating user...');
-      await User.findOneAndUpdate({email:email}, {
-        name: userExist.name.find(n => n === name) ? userExist.name : userExist.name.concat(name),
-        messages: [...new Set([...userExist.messages, message])]
-      })
-      console.log(userExist);
-    } else {
-      console.log('user not exist. creating user...');
-      const newUser = await User.create({
-        name: [name],
-        email: email, 
-        messages: [message] 
-      })
-      console.log(newUser);
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-  console.log('post saved');
-  res.send(`
+async function saveUserPost(req, res) {
+	const { name, email, message } = req.body
+	try {
+		const userExist = await User.findOne({ email: email })
+		if (userExist) {
+			console.log('user already exist. updating user...')
+			await User.findOneAndUpdate(
+				{ email: email },
+				{
+					name: userExist.name.find(n => n === name) ? userExist.name : userExist.name.concat(name),
+					messages: [...new Set([...userExist.messages, message])],
+				}
+			)
+			console.log(userExist)
+		} else {
+			console.log('user not exist. creating user...')
+			const newUser = await User.create({
+				name: [name],
+				email: email,
+				messages: [message],
+			})
+			console.log(newUser)
+		}
+	} catch (error) {
+		console.log(error.message)
+	}
+	console.log('post saved')
+    sgMail
+    .send({
+      from: 'guri240@gmail.com',
+      to:  'guri240@gmail.com',
+      subject: `${name} send you a message`,
+      text: `
+        name: ${name}
+        email: ${email}
+        message: ${message}
+      `,
+    })
+    .then(() => {
+      console.log('Email sent')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+	res.send(`
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -99,6 +121,6 @@ async function saveUserPost(req,res){
   `)
 }
 
-router.post('/', saveUserPost);
+router.post('/', saveUserPost)
 
-module.exports = router;
+module.exports = router
