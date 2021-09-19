@@ -31,24 +31,45 @@ async function saveUserPost(req, res) {
 	} catch (error) {
 		console.log(error.message)
 	}
+
 	console.log('post saved')
-    sgMail
-    .send({
-      from: process.env.GMAIL,
-      to:  process.env.GMAIL,
+    sgMail.send({
+      from: 'thanks@guribs.com',
+      to:  email,
+      subject: `thanks for your message, ${name}`,
+      html: `
+      <div>
+        <h1>i got your message, ${name}!</h1>
+        <p>you can also email me at <a href="mailto:guri240@gmail.com">guri240@gmail.com</a></p>\n
+        <code>have a nice day :)</code>
+      </div>`
+    })
+    .then(() => console.log(`thanks email send to ${email}`))
+    .catch((error) => console.error(error))
+    const user = await User.findOne({ email: email })
+    sgMail.send({
+      from: 'services@guribs.com',
+      to: process.env.GMAIL,
       subject: `${name} send you a message`,
-      text: `
-        name: ${name}
-        email: ${email}
-        message: ${message}
+      html: `
+      <div>    
+        <p>message:${message.trim()}</p>
+        <div>
+        <h1>${name} details:</h1>
+          <p>email: ${user.email}</p>
+          names: <ul>
+          ${user.name?.map( name => `<li>${name.trim()}</li>`).join('')}}
+          </ul>
+          messages: <ul>
+          ${user.messages?.map( message => `<li>${message.trim()}</li>`).join('')}
+          </ul>
+        </div>
+      </div
       `,
     })
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+    .then(() => console.log(`copy sent to ${process.env.GMAIL}`))
+    .catch((error) => console.error(error))
+
 	res.send(`
   <!DOCTYPE html>
   <html lang="en">
